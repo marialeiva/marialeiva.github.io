@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low-Fi Checkout - Persona Inspired</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* LOW-FI WIREFRAME STYLES */
+        .lofi-border {
+            border: 2px solid #000;
+        }
+
+        .lofi-dashed {
+            border: 2px dashed #ccc;
+        }
+
+        .image-placeholder {
+            background-image: repeating-linear-gradient(
+                45deg,
+                #f0f0f0,
+                #f0f0f0 10px,
+                #ffffff 10px,
+                #ffffff 20px
+            );
+        }
+
+        .btn-lofi {
+            background-color: #000;
+            color: #fff;
+            padding: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-lofi:hover {
+            background-color: #333;
+        }
+
+        .screen-container {
+            display: none;
+        }
+
+        .screen-container.active {
+            display: block;
+        }
+
+        input {
+            border: 2px solid #000;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+        
+        <!-- LEFT: WIREFRAME INTERFACE -->
+        <div class="lg:col-span-8 lofi-border p-8 min-h-[700px]">
+            
+            <!-- Progress Tracker -->
+            <div class="flex items-center gap-4 mb-10 pb-4 border-b-2 border-black">
+                <span class="font-extrabold text-xl">S. SHOP</span>
+                <div class="flex-1"></div>
+                <div class="flex gap-2">
+                    <div id="dot-1" class="w-3 h-3 rounded-full bg-black"></div>
+                    <div id="dot-2" class="w-3 h-3 rounded-full bg-gray-200"></div>
+                    <div id="dot-3" class="w-3 h-3 rounded-full bg-gray-200"></div>
+                    <div id="dot-4" class="w-3 h-3 rounded-full bg-gray-200"></div>
+                </div>
+            </div>
+
+            <!-- SCREEN 1: CART -->
+            <div id="screen-cart" class="screen-container active">
+                <h1 class="text-3xl font-black mb-2 uppercase">Your Bag</h1>
+                <p class="text-sm mb-8">[ 2 ITEMS ]</p>
+
+                <div class="space-y-6 mb-10">
+                    <div class="lofi-dashed p-4 flex gap-4">
+                        <div class="w-20 h-20 image-placeholder lofi-border"></div>
+                        <div class="flex-1">
+                            <div class="h-5 bg-black w-1/2 mb-2"></div>
+                            <div class="h-3 bg-gray-200 w-1/4"></div>
+                        </div>
+                        <div class="font-bold">$XX.XX</div>
+                    </div>
+                    <div class="lofi-dashed p-4 flex gap-4">
+                        <div class="w-20 h-20 image-placeholder lofi-border"></div>
+                        <div class="flex-1">
+                            <div class="h-5 bg-black w-1/2 mb-2"></div>
+                            <div class="h-3 bg-gray-200 w-1/4"></div>
+                        </div>
+                        <div class="font-bold">$XX.XX</div>
+                    </div>
+                </div>
+
+                <div class="lofi-border p-6 space-y-4">
+                    <div class="flex justify-between font-bold">
+                        <span>SUBTOTAL</span>
+                        <span>$XX.XX</span>
+                    </div>
+                    <div onclick="navTo('shipping')" class="btn-lofi">Next: Shipping Info</div>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: SHIPPING -->
+            <div id="screen-shipping" class="screen-container">
+                <h1 class="text-3xl font-black mb-8 uppercase">Shipping</h1>
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-xs font-black mb-1 block">FULL NAME</label>
+                        <input type="text" placeholder="[ USER NAME ]">
+                    </div>
+                    <div>
+                        <label class="text-xs font-black mb-1 block">STREET ADDRESS</label>
+                        <input type="text" placeholder="[ ADDRESS ]">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-black mb-1 block">CITY</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label class="text-xs font-black mb-1 block">ZIP</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div onclick="navTo('payment')" class="btn-lofi">Next: Payment</div>
+                </div>
+            </div>
+
+            <!-- SCREEN 3: PAYMENT -->
+            <div id="screen-payment" class="screen-container">
+                <h1 class="text-3xl font-black mb-8 uppercase">Payment</h1>
+                <div class="lofi-dashed p-6 mb-6">
+                    <p class="text-xs font-black mb-4 underline">ORDER SUMMARY</p>
+                    <div class="flex justify-between text-sm mb-1"><span>Items</span><span>$XX.XX</span></div>
+                    <div class="flex justify-between text-sm mb-1"><span>Shipping</span><span>$0.00</span></div>
+                    <div class="flex justify-between font-bold text-lg pt-2 border-t-2 border-black">
+                        <span>TOTAL</span><span>$XX.XX</span>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="lofi-border p-4 flex items-center gap-4">
+                        <div class="w-4 h-4 rounded-full bg-black"></div>
+                        <span class="font-bold">CREDIT CARD [SAVED]</span>
+                    </div>
+                    <div onclick="navTo('success')" class="btn-lofi">Complete Purchase</div>
+                </div>
+            </div>
+
+            <!-- SCREEN 4: SUCCESS -->
+            <div id="screen-success" class="screen-container text-center py-20">
+                <div class="w-16 h-16 lofi-border mx-auto flex items-center justify-center font-black text-2xl mb-6">OK</div>
+                <h1 class="text-3xl font-black mb-2">THANK YOU</h1>
+                <p class="text-sm mb-10">ORDER #XXXXXXXX</p>
+                <div onclick="navTo('cart')" class="underline font-black cursor-pointer">START OVER</div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: PERSONA INFO -->
+        <div class="lg:col-span-4 space-y-6">
+            <div class="lofi-border p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 image-placeholder lofi-border"></div>
+                    <div>
+                        <h3 class="font-black text-lg underline">Sarah Jenkins</h3>
+                        <p class="text-[10px] font-bold uppercase">Persona Type: Mobile</p>
+                    </div>
+                </div>
+                <p class="text-xs italic leading-relaxed">
+                    "Low-fi wireframe focusing on layout hierarchy and touch targets inspired by the Jenkins Persona profile."
+                </p>
+            </div>
+
+            <div class="lofi-border bg-gray-50 p-6">
+                <h4 class="text-xs font-black mb-4 underline uppercase">Wireframe Notes</h4>
+                <ul class="text-[11px] space-y-3 font-bold">
+                    <li>• USES INTER FONT FROM PROFILE</li>
+                    <li>• NO COLORS / NO SHADOWS</li>
+                    <li>• SCALE-READY COMPONENTS</li>
+                    <li>• FOCUS ON TOUCH AREAS</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function navTo(screenId) {
+            document.querySelectorAll('.screen-container').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen-' + screenId).classList.add('active');
+
+            const steps = ['cart', 'shipping', 'payment', 'success'];
+            const currentIndex = steps.indexOf(screenId);
+            
+            steps.forEach((s, idx) => {
+                const dot = document.getElementById('dot-' + (idx + 1));
+                dot.style.backgroundColor = idx <= currentIndex ? 'black' : '#eee';
+            });
+        }
+    </script>
+</body>
+</html>

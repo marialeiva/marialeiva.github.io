@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handbook de Desarrollo de Automatización | Maria Leiva</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-dark: #020617;
+            --accent-glow: #38bdf8;
+            --navy-deep: #001f3f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: #1e293b;
+            --text-main: #f8fafc; /* Blanco con alto contraste */
+            --text-dim: #cbd5e1;
+            --code-bg: #000000;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* Estilo para impresión/exportación manteniendo el diseño */
+        @media print {
+            body {
+                background-color: var(--primary-dark) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print { display: none !important; }
+            .page-container { margin: 0 !important; width: 100% !important; border: none !important; }
+            .card, .code-block { page-break-inside: avoid; border: 1px solid var(--border) !important; }
+            h2, h3 { color: var(--accent-glow) !important; }
+        }
+
+        .page-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 60px;
+            background: var(--primary-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Hero / Portada */
+        .hero {
+            text-align: center;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+            background: radial-gradient(circle at top, #0ea5e915 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(to right, #ffffff, var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-family: 'Fira Code', monospace;
+            color: var(--accent-glow);
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        /* Secciones */
+        h2 {
+            font-size: 1.5rem;
+            color: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-glow);
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Tablas con contraste */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0,0,0,0.2);
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            background: #0f172a;
+            color: var(--accent-glow);
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* Código */
+        .code-block {
+            font-family: 'Fira Code', monospace;
+            background: var(--code-bg);
+            color: #7dd3fc;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #0c4a6e;
+            font-size: 0.85rem;
+            margin: 15px 0;
+            overflow-x: auto;
+            white-space: pre;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .no-print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-glow);
+            color: var(--primary-dark);
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+        }
+
+        .no-print-btn:hover {
+            transform: translateY(-3px);
+            background: #7dd3fc;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+<a href="javascript:window.print()" class="no-print-btn no-print">
+    <i class="fas fa-download"></i> EXPORTAR DOCUMENTO
+</a>
+
+<div class="page-container">
+    <header class="hero">
+        <div style="font-family: 'Fira Code'; color: var(--accent-glow); margin-bottom: 10px;">[ CORE STANDARDS ]</div>
+        <h1>RDA Development Handbook</h1>
+        <p>Bridgestone Americas Shared Service | Automation-WI-REG-DEV001</p>
+    </header>
+
+    <section id="historial">
+        <h2><i class="fas fa-history"></i> Revision History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Doc. Version</th>
+                    <th>Date</th>
+                    <th>Sections Updated</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.0</td>
+                    <td>12-13-2021</td>
+                    <td>All</td>
+                    <td>Initial standard creation</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="aprobaciones">
+        <h2><i class="fas fa-user-check"></i> Approval History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Approver</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Lead Developer</td><td>Maria Leiva</td><td>Automation Specialist</td></tr>
+                <tr><td>QA Manager</td><td>[Pending]</td><td>Quality Assurance</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="objetivo">
+        <h2><i class="fas fa-bullseye"></i> OBJETIVE</h2>
+        <div class="card">
+            <p>The purpose of this document is to provide guidance, information, and advice of good programming practices to maintain a high quality of development in order to increase the rate of successful RDA macros development.</p>
+        </div>
+    </section>
+
+    <section id="alcance">
+        <h2><i class="fas fa-expand"></i> SCOPE</h2>
+        <div class="card">
+            <p>Create standards for developing VBA Macros and set up policies and rules that improve the quality and performance of the process. This will provide a way to develop and maintain a macro effortlessly.</p>
+        </div>
+    </section>
+
+    <section id="practicas">
+        <h2><i class="fas fa-code"></i> GOOD PRACTICES</h2>
+
+        <h3>1. Modular Structure</h3>
+        <p>The structure must be easy to understand for other developers. Use a "black box" approach where each function performs a specific task. Related procedures should be grouped in modules.</p>
+        <div class="code-block">
+' Example of Modular Main Structure
+Sub Main()
+    Call InitialSettings() ' Prep environment
+    Call OpenSourceFiles()  ' Load data
+    Call BusinessLogic()    ' Core processing
+    Call FinalizeAndSave()  ' Output
+End Sub</div>
+
+        <h3>2. English Documentation</h3>
+        <p>For global compatibility, all internal documentation (variable names, comments, procedure titles) must be written in <strong>English</strong>.</p>
+
+        <h3>3. Performance Features</h3>
+        <p>Mandatory optimization to increase speed and efficiency by disabling UI overhead during macro execution.</p>
+        <div class="code-block">
+' High-Performance Block
+With Application
+    .ScreenUpdating = False
+    .Calculation = xlCalculationManual
+    .EnableEvents = False
+    .DisplayAlerts = False
+End With</div>
+
+        <h3>4. Recording Macros</h3>
+        <p>Recorded macros are for reference only. Production code must be cleaned. Remove redundant commands like <code>.Select</code> or <code>.Activate</code>.</p>
+
+        <h3>5. Naming Convention</h3>
+        <table>
+            <thead>
+                <tr><th>Element</th><th>Prefix</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Long / Integer</td><td>lng / int</td><td>lngRowCounter</td></tr>
+                <tr><td>String</td><td>str</td><td>strEmployeeName</td></tr>
+                <tr><td>Range</td><td>rng</td><td>rngInputTable</td></tr>
+                <tr><td>Worksheet</td><td>ws</td><td>wsReportSheet</td></tr>
+                <tr><td>Object</td><td>obj</td><td>objSAPSession</td></tr>
+            </tbody>
+        </table>
+
+        <h3>6. Working with SharePoint</h3>
+        <p>Avoid hardcoded paths. Use dynamic environment variables to ensure the macro works for any user on any synchronized station.</p>
+        <div class="code-block">
+' Dynamic Pathing
+strPath = Environ("USERPROFILE") & "\SharePoint\Automation\Data\"</div>
+
+        <h3>7. Working with SAP & Outlook</h3>
+        <p>Always validate SAP Scripting status and Outlook account visibility. Use <code>.Display</code> during testing and <code>.Send</code> only for production.</p>
+        <div class="code-block">
+' Outlook Account Handling
+For Each oAcc In OutApp.Session.Accounts
+    If UCase(oAcc) = UCase(strSender) Then
+        With objMail
+            Set .SendUsingAccount = oAcc
+            .HTMLBody = strBody & .HTMLBody
+            .Display 
+        End With
+    End If
+Next</div>
+    </section>
+
+    <footer>
+        <p>> Documentation Reference: Automation-WI-REG-DEV001 | Version 1.0</p>
+        <p>Portfolio Maria Leiva - Automation Specialist 2026</p>
+    </footer>
+</div>
+
+</body>
+</html>

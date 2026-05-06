@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Persona Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .persona-container {
+            display: none;
+        }
+        .persona-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 text-slate-900">
+
+    <div class="max-w-5xl mx-auto">
+        
+        <!-- Navigation -->
+        <div class="flex space-x-4 mb-8 bg-white p-1.5 rounded-xl shadow-sm border border-slate-200 w-fit">
+            <button onclick="showPersona('sarah')" id="btn-sarah" class="nav-btn px-6 py-2 rounded-lg text-sm font-medium transition-all bg-slate-900 text-white shadow-md">
+                Sarah Jenkins
+            </button>
+            <button onclick="showPersona('david')" id="btn-david" class="nav-btn px-6 py-2 rounded-lg text-sm font-medium transition-all text-slate-500 hover:text-slate-800">
+                David Chen
+            </button>
+        </div>
+
+        <!-- Sarah Persona -->
+        <div id="persona-sarah" class="persona-container active bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+            <!-- Header Section -->
+            <div class="p-8 md:p-12 border-b border-slate-100 flex flex-col md:flex-row md:items-center gap-8">
+                <div class="relative">
+                    <div class="w-32 h-32 rounded-2xl overflow-hidden ring-4 ring-offset-4 ring-indigo-500 shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200&h=200" alt="Sarah Jenkins" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-3 -right-3 bg-white p-2 rounded-xl shadow-md border border-slate-100">
+                        <svg viewBox="0 0 100 100" class="w-10 h-10">
+                            <rect width="100" height="100" rx="20" fill="#4F46E5" />
+                            <path d="M50 20 L30 55 H50 L40 85 L70 45 H50 Z" fill="white" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="flex-1">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
+                        <div>
+                            <h1 class="text-3xl font-bold text-slate-900 mb-1">Sarah Jenkins</h1>
+                            <div class="flex flex-wrap gap-y-2 gap-x-4 text-sm text-slate-500 font-medium italic">
+                                <span class="flex items-center"><i data-lucide="user" class="w-4 h-4 mr-1"></i> 29 yrs</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> Chicago, IL</span>
+                                <span class="flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i> Marketing Manager</span>
+                            </div>
+                        </div>
+                        <div class="px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-wider border border-indigo-100">
+                            The Mobile Power User
+                        </div>
+                    </div>
+                    <blockquote class="text-xl md:text-2xl font-light text-slate-700 leading-relaxed italic border-l-4 border-slate-200 pl-6">
+                        "I just want a checkout that remembers me and doesn't break when I'm on the go."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Grid Content -->
+            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                <div class="p-8 space-y-8 bg-slate-50/50">
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i> Summary
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">Sarah is a busy professional who does 80% of her shopping during commutes or lunch breaks. She values speed and technical reliability above all else.</p>
+                    </section>
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="target" class="w-4 h-4 mr-2"></i> Core Motivations
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white rounded-md text-sm border border-slate-200 text-slate-700 shadow-sm">Efficiency</span>
+                            <span class="px-3 py-1 bg-white rounded-md text-sm border border-slate-200 text-slate-700 shadow-sm">Convenience</span>
+                            <span class="px-3 py-1 bg-white rounded-md text-sm border border-slate-200 text-slate-700 shadow-sm">Instant Gratification</span>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="p-8 space-y-8">
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="zap" class="w-4 h-4 mr-2 text-yellow-500"></i> Key Goals
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-sm text-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 mr-3 shrink-0"></span> Complete purchases in under two minutes</li>
+                            <li class="flex items-start text-sm text-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 mr-3 shrink-0"></span> Save shipping/billing details securely</li>
+                            <li class="flex items-start text-sm text-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 mr-3 shrink-0"></span> Seamless social-to-cart transitions</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="alert-circle" class="w-4 h-4 mr-2 text-red-500"></i> Frustrations
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-sm text-slate-600"><span class="text-red-400 mr-3 shrink-0">✕</span> Form fields resetting on app switch</li>
+                            <li class="flex items-start text-sm text-slate-600"><span class="text-red-400 mr-3 shrink-0">✕</span> Small touch targets on mobile</li>
+                            <li class="flex items-start text-sm text-slate-600"><span class="text-red-400 mr-3 shrink-0">✕</span> Technical glitches mid-payment</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <div class="p-8 space-y-8 bg-slate-50/50">
+                    <section>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Shopping Behavior</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">High-frequency, impulsive but brand-loyal shopper. Heavily influenced by Instagram/TikTok ads.</p>
+                    </section>
+                    <section>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Preferred Tech</h3>
+                        <div class="flex items-center space-x-3 text-slate-700">
+                            <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            <span class="text-sm font-medium">iPhone 15 Pro (Primary), Apple Watch</span>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Must-Have Features</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center p-2 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 mr-2 text-indigo-500"></i> One-click checkout
+                            </div>
+                            <div class="flex items-center p-2 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 mr-2 text-indigo-500"></i> FaceID Authentication
+                            </div>
+                            <div class="flex items-center p-2 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 mr-2 text-indigo-500"></i> Real-time Tracking
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- David Persona -->
+        <div id="persona-david" class="persona-container bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+            <!-- Header Section -->
+            <div class="p-8 md:p-12 border-b border-slate-100 flex flex-col md:flex-row md:items-center gap-8">
+                <div class="relative">
+                    <div class="w-32 h-32 rounded-2xl overflow-hidden ring-4 ring-offset-4 ring-teal-500 shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200" alt="David Chen" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-3 -right-3 bg-white p-2 rounded-xl shadow-md border border-slate-100">
+                        <svg viewBox="0 0 100 100" class="w-10 h-10">
+                            <rect width="100" height="100" rx="20" fill="#0D9488" />
+                            <path d="M50 25 L75 35 V55 C75 70 50 80 50 80 C50 80 25 70 25 55 V35 L50 25 Z" fill="none" stroke="white" stroke-width="6" />
+                            <circle cx="45" cy="65" r="5" fill="white" />
+                            <circle cx="65" cy="65" r="5" fill="white" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="flex-1">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
+                        <div>
+                            <h1 class="text-3xl font-bold text-slate-900 mb-1">David Chen</h1>
+                            <div class="flex flex-wrap gap-y-2 gap-x-4 text-sm text-slate-500 font-medium italic">
+                                <span class="flex items-center"><i data-lucide="user" class="w-4 h-4 mr-1"></i> 42 yrs</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> Austin, TX</span>
+                                <span class="flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-1"></i> Software Engineer</span>
+                            </div>
+                        </div>
+                        <div class="px-4 py-1.5 rounded-full bg-teal-50 text-teal-700 text-xs font-bold uppercase tracking-wider border border-teal-100">
+                            The Analytical Shopper
+                        </div>
+                    </div>
+                    <blockquote class="text-xl md:text-2xl font-light text-slate-700 leading-relaxed italic border-l-4 border-slate-200 pl-6">
+                        "Show me the total price upfront. I hate getting to the end and seeing hidden fees."
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Grid Content -->
+            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                <div class="p-8 space-y-8 bg-slate-50/50">
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i> Summary
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">David is deliberate and detail-oriented. He reads reviews and compares prices before committing. Technical stability is a prerequisite for trust.</p>
+                    </section>
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="target" class="w-4 h-4 mr-2"></i> Core Motivations
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white rounded-md text-sm border border-slate-200 text-slate-700 shadow-sm">Security</span>
+                            <span class="px-3 py-1 bg-white rounded-md text-sm border border-slate-200 text-slate-700 shadow-sm">Accuracy</span>
+                            <span class="px-3 py-1 bg-white rounded-md text-sm border border-slate-200 text-slate-700 shadow-sm">Value for Money</span>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="p-8 space-y-8">
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="zap" class="w-4 h-4 mr-2 text-yellow-500"></i> Key Goals
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-sm text-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 mr-3 shrink-0"></span> Transparent pricing with no surprises</li>
+                            <li class="flex items-start text-sm text-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 mr-3 shrink-0"></span> Clear, uncluttered order summary</li>
+                            <li class="flex items-start text-sm text-slate-700"><span class="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 mr-3 shrink-0"></span> Accurate delivery estimates</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3 class="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">
+                            <i data-lucide="alert-circle" class="w-4 h-4 mr-2 text-red-500"></i> Frustrations
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-sm text-slate-600"><span class="text-red-400 mr-3 shrink-0">✕</span> Hidden shipping fees at final step</li>
+                            <li class="flex items-start text-sm text-slate-600"><span class="text-red-400 mr-3 shrink-0">✕</span> Cluttered confirmation pages</li>
+                            <li class="flex items-start text-sm text-slate-600"><span class="text-red-400 mr-3 shrink-0">✕</span> Unclear promo code application</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <div class="p-8 space-y-8 bg-slate-50/50">
+                    <section>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Shopping Behavior</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Planned, low-frequency, high-value purchases. Performs heavy research before buying.</p>
+                    </section>
+                    <section>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Preferred Tech</h3>
+                        <div class="flex items-center space-x-3 text-slate-700">
+                            <i data-lucide="monitor" class="w-5 h-5"></i>
+                            <span class="text-sm font-medium">MacBook Pro (Research), iPad (Browsing)</span>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Must-Have Features</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center p-2 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 mr-2 text-teal-500"></i> Guest Checkout
+                            </div>
+                            <div class="flex items-center p-2 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 mr-2 text-teal-500"></i> Detailed Price Breakdowns
+                            </div>
+                            <div class="flex items-center p-2 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 mr-2 text-teal-500"></i> Direct Support Access
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Brand Info -->
+        <div class="mt-8 flex items-center justify-center space-x-2 text-slate-400 text-sm">
+            <span class="font-semibold uppercase tracking-widest">Persona for</span>
+            <div id="footer-brand" class="flex items-center px-3 py-1 bg-white rounded-full border border-slate-200 shadow-sm transition-all duration-300">
+                <div id="footer-logo" class="mr-2">
+                    <svg viewBox="0 0 100 100" class="w-6 h-6">
+                        <rect width="100" height="100" rx="20" fill="#4F46E5" />
+                        <path d="M50 20 L30 55 H50 L40 85 L70 45 H50 Z" fill="white" />
+                    </svg>
+                </div>
+                <span id="footer-name" class="font-bold text-slate-700">SwiftShop</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        function showPersona(id) {
+            // Update containers
+            document.querySelectorAll('.persona-container').forEach(el => el.classList.remove('active'));
+            document.getElementById('persona-' + id).classList.add('active');
+
+            // Update buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-500', 'hover:text-slate-800');
+            });
+            const activeBtn = document.getElementById('btn-' + id);
+            activeBtn.classList.remove('text-slate-500', 'hover:text-slate-800');
+            activeBtn.classList.add('bg-slate-900', 'text-white', 'shadow-md');
+
+            // Update footer info
+            const footerLogo = document.getElementById('footer-logo');
+            const footerName = document.getElementById('footer-name');
+            
+            if (id === 'sarah') {
+                footerLogo.innerHTML = `<svg viewBox="0 0 100 100" class="w-6 h-6"><rect width="100" height="100" rx="20" fill="#4F46E5" /><path d="M50 20 L30 55 H50 L40 85 L70 45 H50 Z" fill="white" /></svg>`;
+                footerName.textContent = 'SwiftShop';
+            } else {
+                footerLogo.innerHTML = `<svg viewBox="0 0 100 100" class="w-6 h-6"><rect width="100" height="100" rx="20" fill="#0D9488" /><path d="M50 25 L75 35 V55 C75 70 50 80 50 80 C50 80 25 70 25 55 V35 L50 25 Z" fill="none" stroke="white" stroke-width="6" /><circle cx="45" cy="65" r="5" fill="white" /><circle cx="65" cy="65" r="5" fill="white" /></svg>`;
+                footerName.textContent = 'TrustCart';
+            }
+        }
+    </script>
+</body>
+</html>

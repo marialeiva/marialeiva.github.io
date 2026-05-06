@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Journey Map - Modern Aesthetic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+
+        .journey-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E2E8F0;
+            overflow: hidden;
+        }
+
+        .stage-header {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .stage-01 { color: #6366F1; background: #EEF2FF; }
+        .stage-02 { color: #8B5CF6; background: #F5F3FF; }
+        .stage-03 { color: #EC4899; background: #FDF2F8; }
+        .stage-04 { color: #F59E0B; background: #FFFBEB; }
+        .stage-05 { color: #10B981; background: #ECFDF5; }
+
+        .row-label {
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94A3B8;
+            padding: 20px 15px;
+            width: 120px;
+            background: #FAFBFC;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .content-cell {
+            padding: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            border-bottom: 1px solid #F1F5F9;
+            border-right: 1px solid #F1F5F9;
+        }
+
+        .emotion-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #E2E8F0;
+            transition: transform 0.2s;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-4px);
+            border-color: #6366F1;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Customer Journey Map</h1>
+            <p class="text-slate-500 mt-2 font-medium">Visualizing the end-to-end checkout experience for Sarah Jenkins.</p>
+        </div>
+
+        <div class="journey-container">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="row-label bg-slate-50 border-b-2 border-slate-200">Phase</th>
+                            <th class="stage-header stage-01 border-b-2 border-slate-200">01. Browse</th>
+                            <th class="stage-header stage-02 border-b-2 border-slate-200">02. Cart</th>
+                            <th class="stage-header stage-03 border-b-2 border-slate-200">03. Checkout</th>
+                            <th class="stage-header stage-04 border-b-2 border-slate-200">04. Payment</th>
+                            <th class="stage-header stage-05 border-b-2 border-slate-200">05. Confirm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ACTIONS -->
+                        <tr>
+                            <td class="row-label">Actions</td>
+                            <td class="content-cell font-medium">Explores product details, compares specs, and adds items to the cart.</td>
+                            <td class="content-cell font-medium">Reviews item list, verifies quantities, and initiates checkout.</td>
+                            <td class="content-cell font-medium">Provides delivery address and selects shipping speed.</td>
+                            <td class="content-cell font-medium">Selects payment method and applies promotional codes.</td>
+                            <td class="content-cell font-medium">Reviews final order details and tracking information.</td>
+                        </tr>
+
+                        <!-- PAIN POINTS -->
+                        <tr>
+                            <td class="row-label">Pain Points</td>
+                            <td class="content-cell text-slate-500 italic">Unoptimized mobile assets causing slow load times.</td>
+                            <td class="content-cell text-slate-500 italic">Loss of cart data when switching between devices.</td>
+                            <td class="content-cell text-slate-500 italic">Repetitive manual typing on small touchscreens.</td>
+                            <td class="content-cell text-slate-500 italic">Unexpected shipping fees appearing at the final step.</td>
+                            <td class="content-cell text-slate-500 italic">Unclear delivery windows and cluttered confirmation.</td>
+                        </tr>
+
+                        <!-- EMOTIONAL STATE -->
+                        <tr>
+                            <td class="row-label">Emotion</td>
+                            <td class="content-cell">
+                                <span class="emotion-tag bg-blue-50 text-blue-600">Curious 💡</span>
+                            </td>
+                            <td class="content-cell">
+                                <span class="emotion-tag bg-purple-50 text-purple-600">Decisive ⚡</span>
+                            </td>
+                            <td class="content-cell">
+                                <span class="emotion-tag bg-pink-50 text-pink-600">Focused 🎯</span>
+                            </td>
+                            <td class="content-cell">
+                                <span class="emotion-tag bg-amber-50 text-amber-600">Anxious ⏳</span>
+                            </td>
+                            <td class="content-cell">
+                                <span class="emotion-tag bg-emerald-50 text-emerald-600">Relieved ✅</span>
+                            </td>
+                        </tr>
+
+                        <!-- DESIGN SOLUTIONS -->
+                        <tr>
+                            <td class="row-label">Solutions</td>
+                            <td class="content-cell font-bold text-indigo-600">Performance Optimization</td>
+                            <td class="content-cell font-bold text-violet-600">Cross-Device Sync</td>
+                            <td class="content-cell font-bold text-pink-600">Smart Autofill Logic</td>
+                            <td class="content-cell font-bold text-amber-600">Cost Transparency</td>
+                            <td class="content-cell font-bold text-emerald-600">Minimalist Summary</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- STRATEGIC OPPORTUNITIES -->
+        <div class="mt-12">
+            <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6">Strategic Opportunities</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="opportunity-card">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Mobile-First UI</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Ensure touch targets exceed 44px and forms utilize native mobile input types.</p>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="w-10 h-10 bg-violet-50 text-violet-600 rounded-xl flex items-center justify-center mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L22 22"/></svg>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Session Integrity</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Persistent cart states that sync across desktop and mobile to prevent drop-off.</p>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Trust Building</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Strategic placement of security badges and encryption notices at the payment step.</p>
+                </div>
+
+                <div class="opportunity-card">
+                    <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Clarity & Speed</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Eliminate clutter in the final summary to highlight arrival dates and total costs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

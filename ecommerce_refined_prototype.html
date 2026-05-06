@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Checkout Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .screen-container {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .screen-container.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        input, select {
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.03);
+        }
+
+        .rounded-full-btn {
+            border-radius: 9999px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .payment-card {
+            transition: all 0.2s ease;
+        }
+
+        .payment-card.selected {
+            border-color: #000;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Progress Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel">
+        <div class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 text-white"></i>
+                </div>
+                <span class="font-semibold tracking-tight text-lg">SwiftShop</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8">
+                <div class="flex items-center gap-3">
+                    <span id="step-1" class="w-6 h-6 rounded-full bg-black text-white text-[10px] flex items-center justify-center font-bold">1</span>
+                    <span class="text-sm font-medium">Cart</span>
+                </div>
+                <div class="w-8 h-[1px] bg-gray-200"></div>
+                <div class="flex items-center gap-3 text-gray-400">
+                    <span id="step-2" class="w-6 h-6 rounded-full bg-gray-100 text-[10px] flex items-center justify-center font-bold">2</span>
+                    <span class="text-sm font-medium">Shipping</span>
+                </div>
+                <div class="w-8 h-[1px] bg-gray-200"></div>
+                <div class="flex items-center gap-3 text-gray-400">
+                    <span id="step-3" class="w-6 h-6 rounded-full bg-gray-100 text-[10px] flex items-center justify-center font-bold">3</span>
+                    <span class="text-sm font-medium">Payment</span>
+                </div>
+            </nav>
+
+            <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-12 px-6">
+        <div class="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Side: Flow -->
+            <div class="lg:col-span-7">
+                
+                <!-- Screen 1: Cart -->
+                <div id="screen-cart" class="screen-container active">
+                    <h1 class="text-3xl font-light mb-8 tracking-tight">Your Cart</h1>
+                    
+                    <div class="space-y-6">
+                        <!-- Item 1 -->
+                        <div class="flex gap-6 pb-6 border-b border-gray-100">
+                            <div class="w-24 h-32 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-medium">Minimalist Analog Watch</h3>
+                                        <p class="text-sm text-gray-500 mt-1">Series 2, Matte Black</p>
+                                    </div>
+                                    <span class="font-medium">$240.00</span>
+                                </div>
+                                <div class="flex items-center gap-4 mt-6">
+                                    <div class="flex items-center border border-gray-200 rounded-full px-4 py-1">
+                                        <button class="text-gray-400 hover:text-black">-</button>
+                                        <span class="mx-4 text-sm font-medium">1</span>
+                                        <button class="text-gray-400 hover:text-black">+</button>
+                                    </div>
+                                    <button class="text-xs text-gray-400 hover:text-red-500 font-medium">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex gap-6 pb-6 border-b border-gray-100">
+                            <div class="w-24 h-32 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-medium">Studio Headphones</h3>
+                                        <p class="text-sm text-gray-500 mt-1">Over-ear, Wireless</p>
+                                    </div>
+                                    <span class="font-medium">$150.00</span>
+                                </div>
+                                <div class="flex items-center gap-4 mt-6">
+                                    <div class="flex items-center border border-gray-200 rounded-full px-4 py-1">
+                                        <button class="text-gray-400 hover:text-black">-</button>
+                                        <span class="mx-4 text-sm font-medium">1</span>
+                                        <button class="text-gray-400 hover:text-black">+</button>
+                                    </div>
+                                    <button class="text-xs text-gray-400 hover:text-red-500 font-medium">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex justify-end">
+                        <button onclick="navTo('shipping')" class="bg-black text-white px-10 py-4 rounded-full-btn font-medium hover:scale-[1.02] active:scale-95 transition-transform">
+                            Continue to Shipping
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Screen 2: Shipping -->
+                <div id="screen-shipping" class="screen-container">
+                    <button onclick="navTo('cart')" class="text-gray-400 flex items-center gap-2 mb-6 hover:text-black transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Back to cart</span>
+                    </button>
+                    <h1 class="text-3xl font-light mb-8 tracking-tight">Shipping Details</h1>
+                    
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">First Name</label>
+                                <input type="text" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="Sarah">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Last Name</label>
+                                <input type="text" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="Jenkins">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Address</label>
+                            <input type="text" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="123 Creative Street">
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="col-span-2 space-y-2">
+                                <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">City</label>
+                                <input type="text" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="Chicago">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">ZIP</label>
+                                <input type="text" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="60601">
+                            </div>
+                        </div>
+
+                        <div class="mt-12 flex justify-end">
+                            <button type="button" onclick="navTo('payment')" class="bg-black text-white px-10 py-4 rounded-full-btn font-medium hover:scale-[1.02] transition-transform">
+                                Continue to Payment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Screen 3: Payment -->
+                <div id="screen-payment" class="screen-container">
+                    <button onclick="navTo('shipping')" class="text-gray-400 flex items-center gap-2 mb-6 hover:text-black transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Back to shipping</span>
+                    </button>
+                    <h1 class="text-3xl font-light mb-4 tracking-tight">Payment Method</h1>
+
+                    <!-- Presaved Payments Section -->
+                    <div class="mb-10">
+                        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Saved Methods</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div onclick="selectSavedCard(this)" class="payment-card selected p-5 rounded-3xl border border-gray-100 flex items-start justify-between cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-6 bg-blue-600 rounded flex items-center justify-center text-[8px] text-white font-bold">VISA</div>
+                                    <div>
+                                        <p class="text-sm font-medium">Visa ending in 4242</p>
+                                        <p class="text-xs text-gray-400">Expires 12/26</p>
+                                    </div>
+                                </div>
+                                <div class="check-circle w-5 h-5 rounded-full border-2 border-black bg-black flex items-center justify-center">
+                                    <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                                </div>
+                            </div>
+                            <div onclick="selectSavedCard(this)" class="payment-card p-5 rounded-3xl border border-gray-100 flex items-start justify-between cursor-pointer">
+                                <div class="flex items-start gap-4 opacity-60">
+                                    <div class="w-10 h-6 bg-red-500 rounded flex items-center justify-center text-[8px] text-white font-bold">MC</div>
+                                    <div>
+                                        <p class="text-sm font-medium">MasterCard ending in 8891</p>
+                                        <p class="text-xs text-gray-400">Expires 04/25</p>
+                                    </div>
+                                </div>
+                                <div class="check-circle w-5 h-5 rounded-full border-2 border-gray-200"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 flex items-center gap-4">
+                        <div class="h-[1px] flex-1 bg-gray-100"></div>
+                        <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Or New Card</span>
+                        <div class="h-[1px] flex-1 bg-gray-100"></div>
+                    </div>
+                    
+                    <div id="new-card-form" class="space-y-4 opacity-40 transition-opacity pointer-events-none">
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Card Number</label>
+                            <input type="text" onclick="focusNewCard()" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Expiry</label>
+                                <input type="text" onclick="focusNewCard()" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="MM / YY">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">CVC</label>
+                                <input type="text" onclick="focusNewCard()" class="w-full p-4 rounded-3xl bg-gray-50 border-transparent border focus:bg-white" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex justify-end">
+                        <button type="button" onclick="navTo('success')" class="bg-black text-white px-10 py-4 rounded-full-btn font-medium hover:scale-[1.02] transition-transform">
+                            Pay <span class="final-total ml-1">$0.00</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Screen 4: Success -->
+                <div id="screen-success" class="screen-container">
+                    <div class="text-center py-20">
+                        <div class="w-20 h-20 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="check" class="w-10 h-10"></i>
+                        </div>
+                        <h1 class="text-4xl font-light mb-4 tracking-tight">Order Confirmed</h1>
+                        <p class="text-gray-500 mb-8 max-w-sm mx-auto">Thank you for your purchase. We've sent a confirmation email to sarah@jenkins.com</p>
+                        <button onclick="location.reload()" class="border border-gray-200 px-10 py-4 rounded-full-btn font-medium hover:bg-gray-50 transition-colors">
+                            Return to Shop
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Side: Summary (Sticky) -->
+            <div id="summary-section" class="lg:col-span-5">
+                <div class="sticky top-32 bg-gray-50 rounded-[40px] p-8 lg:p-10">
+                    <h2 class="text-xl font-semibold mb-8">Summary</h2>
+                    
+                    <div class="space-y-4 mb-8 text-[13px]">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Subtotal</span>
+                            <span id="summary-subtotal" class="font-medium">$390.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Shipping</span>
+                            <span id="summary-shipping" class="text-green-600 font-medium">Free</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Estimated Taxes (5%)</span>
+                            <span id="summary-tax" class="font-medium">$19.50</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Processing Fees (8%)</span>
+                            <span id="summary-fees" class="font-medium">$31.20</span>
+                        </div>
+                        <div id="discount-row" class="hidden flex justify-between text-green-600 font-medium">
+                            <span>Discount (20%)</span>
+                            <span id="summary-discount">-$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Promo Code Field -->
+                    <div class="relative mb-8">
+                        <input type="text" id="promo-input" class="w-full py-4 pl-6 pr-24 rounded-full-btn border border-gray-200 bg-white text-sm" placeholder="Promo code">
+                        <button onclick="applyPromo()" class="absolute right-2 top-2 bottom-2 px-6 bg-black text-white text-xs font-semibold rounded-full-btn hover:bg-gray-800 transition-colors">
+                            Apply
+                        </button>
+                        <p id="promo-error" class="hidden text-[10px] text-red-500 mt-2 ml-4">Invalid promo code</p>
+                        <p id="promo-success" class="hidden text-[10px] text-green-600 mt-2 ml-4 font-bold">"SAVE20" Applied!</p>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-200">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total</p>
+                                <p id="summary-total" class="text-4xl font-light tracking-tighter">$440.70</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trust Badge -->
+                    <div class="mt-8 flex items-center gap-3 py-4 px-6 bg-white rounded-2xl border border-gray-100">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-gray-400"></i>
+                        <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Secure 256-bit SSL Payment</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // State
+        let subtotal = 390.00;
+        let discountRate = 0;
+        const taxRate = 0.05;
+        const feeRate = 0.08;
+
+        function updateTotals() {
+            const tax = subtotal * taxRate;
+            const fees = subtotal * feeRate;
+            const subSum = subtotal + tax + fees;
+            const discount = subSum * discountRate;
+            const total = subSum - discount;
+
+            document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('summary-fees').textContent = `$${fees.toFixed(2)}`;
+            document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+            document.querySelectorAll('.final-total').forEach(el => el.textContent = `$${total.toFixed(2)}`);
+
+            if (discountRate > 0) {
+                document.getElementById('discount-row').classList.remove('hidden');
+                document.getElementById('summary-discount').textContent = `-$${discount.toFixed(2)}`;
+            }
+        }
+
+        function applyPromo() {
+            const input = document.getElementById('promo-input');
+            const error = document.getElementById('promo-error');
+            const success = document.getElementById('promo-success');
+
+            if (input.value.toUpperCase() === 'SAVE20') {
+                discountRate = 0.20;
+                error.classList.add('hidden');
+                success.classList.remove('hidden');
+                input.classList.remove('border-red-500');
+                input.classList.add('border-green-500');
+                updateTotals();
+            } else {
+                error.classList.remove('hidden');
+                success.classList.add('hidden');
+                input.classList.remove('border-green-500');
+                input.classList.add('border-red-500');
+            }
+        }
+
+        function selectSavedCard(element) {
+            // Remove selection from all cards
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected', 'border-black');
+                card.querySelector('.check-circle').classList.remove('bg-black', 'border-black');
+                card.querySelector('.check-circle').innerHTML = '';
+                card.querySelector('.flex').classList.add('opacity-60');
+            });
+
+            // Add selection to clicked card
+            element.classList.add('selected', 'border-black');
+            const circle = element.querySelector('.check-circle');
+            circle.classList.add('bg-black', 'border-black');
+            circle.innerHTML = '<i data-lucide="check" class="w-3 h-3 text-white"></i>';
+            element.querySelector('.flex').classList.remove('opacity-60');
+
+            // Disable new card form
+            document.getElementById('new-card-form').classList.add('opacity-40', 'pointer-events-none');
+            
+            lucide.createIcons();
+        }
+
+        function focusNewCard() {
+            // Deselect saved cards
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected', 'border-black');
+                card.querySelector('.check-circle').classList.remove('bg-black', 'border-black');
+                card.querySelector('.check-circle').innerHTML = '';
+                card.querySelector('.flex').classList.add('opacity-60');
+            });
+
+            // Enable form
+            document.getElementById('new-card-form').classList.remove('opacity-40', 'pointer-events-none');
+        }
+
+        function navTo(screenId) {
+            const summary = document.getElementById('summary-section');
+            if (screenId === 'success') {
+                summary.style.display = 'none';
+                document.querySelector('header nav').classList.add('hidden');
+            } else {
+                summary.style.display = 'block';
+            }
+
+            document.querySelectorAll('.screen-container').forEach(s => s.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById('screen-' + screenId).classList.add('active');
+            }, 50);
+
+            const steps = ['cart', 'shipping', 'payment'];
+            steps.forEach((s, idx) => {
+                const el = document.getElementById('step-' + (idx + 1));
+                if (!el) return;
+                const text = el.nextElementSibling;
+                
+                if (s === screenId) {
+                    el.classList.add('bg-black', 'text-white');
+                    el.classList.remove('bg-gray-100', 'text-gray-400');
+                    el.innerHTML = idx + 1;
+                    text.classList.add('text-black');
+                    text.classList.remove('text-gray-400');
+                } else if (steps.indexOf(s) < steps.indexOf(screenId)) {
+                    el.innerHTML = '<i data-lucide="check" class="w-3 h-3"></i>';
+                    el.classList.add('bg-black', 'text-white');
+                }
+            });
+
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = () => {
+            lucide.createIcons();
+            updateTotals();
+        };
+    </script>
+</body>
+</html>
